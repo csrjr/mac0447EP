@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Spinner
-        android:id="@+id/spnItems"
+        android:id="@+id/spnObjTypes"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -56,13 +56,13 @@
         tools:layout_editor_absoluteX="1dp" />
 
     <AutoCompleteTextView
-        android:id="@+id/actItemName"
+        android:id="@+id/actObjTypeName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/itemNameHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnItems" />
+        app:layout_constraintTop_toBottomOf="@+id/spnObjTypes" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
