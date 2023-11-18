@@ -5,6 +5,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Environment
@@ -16,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
@@ -66,6 +68,7 @@ class MainFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -115,7 +118,7 @@ class MainFragment : Fragment() {
                 val photoFile: File = createImageFile()
                 photoFile?.also {
                     val photoUri = FileProvider.getUriForFile(requireActivity().applicationContext, "br.usp.ime.mac0447.datasetcollector.android.fileprovider", it)
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                     startActivityForResult(takePictureIntent, SAVE_IMAGE_REQUEST_CODE)
                 }
             }
@@ -126,21 +129,23 @@ class MainFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
-            if (requestCode == CAMERA_REQUEST_CODE) {
-                val imageBitmap = data!!.extras!!.get("data") as Bitmap
-                binding.imgObjType.setImageBitmap(imageBitmap)
-            } else if (requestCode == SAVE_IMAGE_REQUEST_CODE) {
+            if (requestCode == SAVE_IMAGE_REQUEST_CODE) {
                 Toast.makeText(requireContext(), "Image saved", Toast.LENGTH_LONG).show()
-
             }
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     private fun createImageFile(): File {
-        val timestamp: String = SimpleDateFormat("yyyyMMdd_HHmmsss").format(Date())
+        val objType: String = binding.actObjTypeName.text.toString()
+        val objName: String = binding.txtObjName.text.toString()
+        val bgColor: String =
+            if (binding.radioFundo.checkedRadioButtonId == R.id.radioClaro) "Claro"
+            else "Escuro"
+
         val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("Dataset${timestamp}", ".jpg", storageDir).apply {
+
+        return File.createTempFile("Dataset_${objType}_${objName}_${bgColor}_", ".jpg", storageDir).apply {
             currentPhotoPath = absolutePath
         }
     }
