@@ -6,7 +6,7 @@ import br.usp.ime.mac0447.datasetcollector.dto.ObjType
 import br.usp.ime.mac0447.datasetcollector.service.ObjTypeService
 
 class MainViewModel : ViewModel() {
-    var objTypes: MutableLiveData<ArrayList<ObjType>> = MutableLiveData<ArrayList<ObjType>>()
+    private var _objTypes: MutableLiveData<ArrayList<ObjType>> = MutableLiveData<ArrayList<ObjType>>()
     var objTypeService: ObjTypeService = ObjTypeService()
 
     init {
@@ -14,6 +14,10 @@ class MainViewModel : ViewModel() {
     }
 
     fun fetchObjTypes(typeName: String) {
-        objTypes = objTypeService.fetchObjTypes(typeName)
+        _objTypes = objTypeService.fetchObjTypes(typeName)
     }
+
+    internal var objTypes: MutableLiveData<ArrayList<ObjType>>
+        get() { return _objTypes }
+        set(value) { _objTypes = value }
 }
