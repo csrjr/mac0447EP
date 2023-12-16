@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DatasetCollector</string>
+    <string name="numTypes">Number of classes:</string>
+    <string name="numItems">Number of items:</string>
+    <string name="zeroItems">0</string>
+    <string name="objTypeHint">Classe do objeto</string>
+    <string name="objNameHint">Nome do objeto</string>
+</resources>
