@@ -75,11 +75,11 @@ def get_features(cnt):
     return area_norm_box, area_norm_circle, cx_norm, cy_norm, stretch
 
 
-def get_feret_box(img_seg, ratio):
+def get_feret_box(img_seg):
     x_in, y_in =np.where(img_seg == 255)
 
-    box_min = (int(min(y_in)*ratio), int(min(x_in)*ratio))
-    box_max = (int(max(y_in)*ratio), int(max(x_in)*ratio))
+    box_min = (int(min(y_in)), int(min(x_in)))
+    box_max = (int(max(y_in)), int(max(x_in)))
 
     return box_min, box_max
 
@@ -108,8 +108,7 @@ def detect_and_draw(img_str):
 
     pred = clf.predict([feats])[0]
 
-    ratio = np.round(input_img.shape[0] / H)
-    box_min, box_max = get_feret_box(seg, 1)
+    box_min, box_max = get_feret_box(seg)
 
     out_img = draw_feret_box(input_img_resz, box_min, box_max, pred)
     out_img = cv2.cvtColor(out_img, cv2.COLOR_BGR2RGB)

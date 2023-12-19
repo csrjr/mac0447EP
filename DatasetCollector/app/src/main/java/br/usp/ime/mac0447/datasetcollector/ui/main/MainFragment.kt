@@ -145,7 +145,7 @@ class MainFragment : Fragment() {
 
         val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
-        return File.createTempFile("Dataset_${objType}_${objName}_${bgColor}_", ".jpg", storageDir).apply {
+        return File.createTempFile("${objType}_${objName}_${bgColor}_", ".jpg", storageDir).apply {
             currentPhotoPath = absolutePath
         }
     }
