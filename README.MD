@@ -8,3 +8,5 @@ O EP é dividido em três etapas:
 - o desenvolvimento de um segundo aplicativo móvel, que utiliza o classificador treinado na etapa anterior em fotos de novos objetos.
 
 O `dataset` coletado na primeira etapa e utilizado para treinamento do modelo pode ser acessado [aqui](https://drive.google.com/drive/folders/1L5wJ3Wo9qkW_CN04vIcJafpp87T5tZ6q?usp=drive_link).
+
+Mais informações sobre o EP podem ser encontradas no [relatório](https://www.overleaf.com/read/cvhkthrqdrpr#661ceb).
